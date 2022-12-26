@@ -1,21 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:task/constants/constants.dart';
-import 'package:task/model/category_model.dart';
+import 'package:task/model/category_model_entity.dart';
+import 'package:task/widgets/loading_indicator.dart';
 
 class CategoryCard extends StatelessWidget {
-  final CategoryModel categoryModel;
+  final CategoryModelEntity categoryModel;
 
   const CategoryCard({Key? key, required this.categoryModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: kPaddingNormal),
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(kPaddingNormal),
             decoration: BoxDecoration(
               color: kCardColor,
               borderRadius: BorderRadius.circular(8),
@@ -25,8 +26,7 @@ class CategoryCard extends StatelessWidget {
               width: 70,
               height: 70,
               fit: BoxFit.contain,
-              placeholder: (context, url) =>
-                  const CircularProgressIndicator.adaptive(),
+              placeholder: (context, url) => const LoadingIndicator(),
               errorWidget: (context, url, error) => const Icon(
                 Icons.error_outline,
                 color: Colors.blue,
@@ -34,7 +34,7 @@ class CategoryCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: kPaddingMedium),
           Text(
             categoryModel.title,
             style: const TextStyle(color: kAccentColor),
